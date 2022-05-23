@@ -1,0 +1,35 @@
+<%= form_with  url: '/search', method: :get, remote: true do |f| %>
+  <div class="form-group p-2">
+    <%= f.label :search %>
+    <%= f.text_field :search, class:"form-control", placeholder: "search", id: "search" %>
+  </div>
+  <div class="p-2">
+    <%= f.submit :submit, class: 'btn btn-success', id: 'submit' %>
+  </div>
+<% end %>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr data-hook="admin_products_index_headers">
+        <th scope="col">id</th>
+        <th scope="col">title</th>
+        <th scope="col">company_name</th>
+        <th scope="col">category</th>
+        <th scope="col">tags</th>
+        <th scope="col">job_type</th>
+        <th scope="col">candidate_required_location</th>
+        <th scope="col">salary</th>      
+      </tr>
+    </thead>
+    <tbody class="messages">      
+    </tbody>
+  </table>
+ 
+<script type="text/javascript">
+  $('form').submit(function(event){
+   event.preventDefault();
+   search_key = $('#search').val()
+    $.get('/search?search='+search_key)
+  });
+</script>
+
